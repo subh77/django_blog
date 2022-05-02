@@ -2,6 +2,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from blog import models
 
 
 class ExampleView(APIView):
@@ -14,3 +15,9 @@ class ExampleView(APIView):
             "auth": str(request.auth),  # None
         }
         return Response(content)
+
+
+class TestModels(APIView):
+    def get(self, request):
+        temp_vals = models.ManagementUser.objects.values().all()
+        return Response(temp_vals)
